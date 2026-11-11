@@ -23,7 +23,7 @@ const POLITICAL = ['#f1e2b6', '#cfe3c0', '#f0cfc2', '#d9d0ea', '#c8e0e4', '#efd9
 const S = {
   T: Date.now(), tMin: Date.now() - 14 * DAY, tMax: Date.now(),
   win: 14 * DAY, playing: false, speed: 6 * HOUR, mode: 'then',
-  cats: new Set(Object.keys(CATS)), cur: true, live: true,
+  cats: new Set(Object.keys(CATS)), cur: true, live: true, nrk: true,
   style: 'dark', sel: null, alt: 1.9, follow: true
 };
 let EVENTS = [], LIVE_META = null, GAZ = [], COUNTRIES = [];
@@ -60,7 +60,7 @@ function normLive(i) {
   return {id: i.id, live: true, category: CATS[i.category] ? i.category : 'other', headline: i.title, place: i.place || '',
           lat: i.lat, lng: i.lng, precision: i.precision || 'exact', radiusKm: i.radiusKm,
           t, learned: Math.max(t, p), timePrecision: i.timeBasis === 'published' ? 'published' : 'exact',
-          status: 'automated', summary: i.detail || '', facts: [], updates: [], src: i.src,
+          status: 'automated', summary: i.detail || '', facts: [], updates: [], src: i.src, locNote: i.locNote,
           sources: [{publisher: i.srcName || i.src, title: i.title, url: i.url, published: i.published}]};
 }
 async function usgsFallback() {
@@ -77,7 +77,7 @@ async function usgsFallback() {
 
 /* ---------- visibility + versions ---------- */
 function inView(e) {
-  if (e.live ? !S.live : !S.cur) return false;
+  if (e.live ? !(e.src === 'nrk' ? S.nrk : S.live) : !S.cur) return false;
   if (!S.cats.has(e.category)) return false;
   const appears = S.mode === 'then' ? e.learned : e.t;
   if (appears > S.T) return false;
@@ -117,7 +117,7 @@ function circle(lat, lng, km) {
   return {type: 'Polygon', coordinates: [ring]};
 }
 function clusters(list) {
-  const thr = Math.min(28, Math.max(0.35, S.alt * 5)) * RAD, out = [];
+  const thr = Math.min(28, Math.max(0.08, S.alt * 4.2)) * RAD, out = [];
   const sorted = list.slice().sort((a, b) => (a.live - b.live) || (b.t - a.t));
   for (const e of sorted) {
     if (e.id === S.sel) { out.push({lat: e.lat, lng: e.lng, items: [e], pinned: true}); continue; }
@@ -153,7 +153,7 @@ function initGlobe() {
   if (typeof globe.htmlElementVisibilityModifier === 'function')
     globe.htmlElementVisibilityModifier((el, vis) => { el.style.opacity = vis ? 1 : 0; el.style.pointerEvents = vis ? 'auto' : 'none'; });
   const c = globe.controls();
-  c.autoRotate = false; c.enableDamping = true; c.minDistance = 103; c.maxDistance = 520; c.zoomSpeed = 0.9; c.rotateSpeed = 0.7;
+  c.autoRotate = false; c.enableDamping = true; c.minDistance = 100.6; c.maxDistance = 520; c.zoomSpeed = 0.9; c.rotateSpeed = 0.7;
   globe.pointOfView({lat: 28, lng: 28, altitude: S.alt}, 0);
   const fit = () => { const r = $('#stage').getBoundingClientRect(); globe.width(r.width).height(r.height); };
   new ResizeObserver(fit).observe($('#stage')); fit();
@@ -215,7 +215,7 @@ function refresh() {
   const key = S.sel + '|' + cl.map(c => c.items.map(e => e.id).join(',')).join(';');
   if (key !== lastKey) { lastKey = key; globe.htmlElementsData(cl); }
 
-  const areas = vis.filter(e => !e.live && e.radiusKm && (e.id === S.sel || S.alt < 1.3));
+  const areas = vis.filter(e => e.radiusKm && (e.id === S.sel || (!e.live && S.alt < 1.3)));
   const pkey = S.style + '|' + S.sel + '|' + areas.map(e => e.id).join(',');
   if (pkey !== lastPolyKey) {
     lastPolyKey = pkey;
@@ -234,7 +234,7 @@ function select(id, fly = true) {
     document.body.classList.add('story');
     globe.ringsData([{lat: e.lat, lng: e.lng, r: e.radiusKm ? Math.max(2, e.radiusKm / 60) : 2.5}]);
     if (e.movement) startMovement(e);
-    else if (fly) globe.pointOfView({lat: e.lat, lng: e.lng, altitude: Math.min(S.alt, e.radiusKm > 150 ? 1.1 : 0.75)}, 900);
+    else if (fly) globe.pointOfView({lat: e.lat, lng: e.lng, altitude: Math.min(S.alt, e.radiusKm > 150 ? 1.1 : e.src === 'nrk' ? 0.25 : 0.75)}, 900);
   } else { globe.ringsData([]); document.body.classList.remove('story'); }
   lastKey = ''; schedule();
 }
@@ -288,14 +288,14 @@ function renderPanel(vis) {
   const e = EVENTS.find(x => x.id === S.sel), p = $('#panel');
   if (!e) return renderList(vis);
   const cat = CATS[e.category], v = versionOf(e), shown = vis.includes(e);
-  const approx = !e.live && e.precision !== 'exact' && e.precision !== 'city';
+  const approx = e.precision !== 'exact' && e.precision !== 'city' && e.precision !== 'country';
   let h = `<div class="p-top" style="--c:${cat.color}"><span class="p-cat">${esc(cat.label)}</span>
     <span class="lv ${e.status}">${LEVELS[e.status] || e.status}</span><button class="p-close" aria-label="Close story">×</button></div>
     <h1>${esc(e.headline)}</h1>`;
   if (!shown) h += `<div class="note warn">This story is outside the selected time or filters, so it is not on the map right now.</div>`;
-  if (e.live) h += `<div class="note">Automated item from ${esc(e.sources[0].publisher)}. It has not been editorially reviewed.${e.timePrecision === 'published' ? ' The location is inferred from the text and placed at country level.' : ''}</div>`;
+  if (e.live) h += `<div class="note">Automated item from ${esc(e.sources[0].publisher)}. It has not been editorially reviewed.${e.locNote ? ' ' + esc(e.locNote) : e.timePrecision === 'published' ? ' The location is inferred from the text and placed at country level.' : ''}</div>`;
   h += `<dl class="kv">
-    <dt>Where</dt><dd>${esc(e.place) || '—'}${approx ? `<small>Approximate area${e.radiusKm ? `, drawn about ${e.radiusKm} km across the centre` : ''}; not a precise point</small>` : e.precision === 'city' ? '<small>Located to the town or city</small>' : ''}</dd>
+    <dt>Where</dt><dd>${esc(e.place) || '—'}${approx ? `<small>Approximate area${e.radiusKm ? `, drawn with a radius of about ${e.radiusKm} km` : ''}; not a precise point</small>` : e.precision === 'city' ? '<small>Located to the town or city</small>' : ''}</dd>
     <dt>Event time</dt><dd>${e.timePrecision === 'published' ? 'Not established<small>placed on the timeline at publication time</small>' : eventTime(e)}</dd>
     <dt>${e.live ? 'Published' : 'First reported'}</dt><dd>${dt(e.learned)} ${TZ}${!e.live ? '<small>when this compilation first has reporting; may be approximate</small>' : ''}</dd></dl>`;
   if (e.summary) h += `<p class="sum">${esc(e.summary)}</p>`;
@@ -349,11 +349,14 @@ function buildCats() {
   $('#catAll').onclick = () => setAll(true); $('#catNone').onclick = () => setAll(false);
   $('#lyCurated').onchange = e => { S.cur = e.target.checked; schedule(); };
   $('#lyLive').onchange = e => { S.live = e.target.checked; schedule(); };
+  $('#lyNrk').onchange = e => { S.nrk = e.target.checked; schedule(); };
+  $('#goNorway').onclick = () => { select(null); document.body.classList.remove('menu'); globe.pointOfView({lat: 64.5, lng: 13, altitude: 0.42}, 1000); };
+  $('#goWorld').onclick = () => { select(null); document.body.classList.remove('menu'); globe.pointOfView({lat: 28, lng: 28, altitude: 1.9}, 1000); };
 }
 function renderCounts(vis) {
   const n = {}; for (const e of vis) n[e.category] = (n[e.category] || 0) + 1;
   document.querySelectorAll('.cat').forEach(l => { l.querySelector('em').textContent = n[l.dataset.k] || ''; });
-  $('#nCur').textContent = vis.filter(e => !e.live).length; $('#nLive').textContent = vis.filter(e => e.live).length;
+  $('#nCur').textContent = vis.filter(e => !e.live).length; $('#nLive').textContent = vis.filter(e => e.live && e.src !== 'nrk').length; $('#nNrk').textContent = vis.filter(e => e.src === 'nrk').length;
 }
 function buildSearch() {
   const q = $('#q'), box = $('#qres'); let res = [], act = -1;
@@ -362,7 +365,7 @@ function buildSearch() {
     if (s.length < 2) { box.hidden = true; return; }
     const places = GAZ.filter(g => [g.n, ...(g.a || [])].some(n => n.toLowerCase().includes(s)))
       .sort((a, b) => (b.n.toLowerCase().startsWith(s) - a.n.toLowerCase().startsWith(s)) || a.n.length - b.n.length).slice(0, 6)
-      .map(g => ({kind: 'place', label: g.n, sub: g.t, g}));
+      .map(g => ({kind: 'place', label: g.n, sub: {kommune: 'municipality, Norway', sted: 'place, Norway', fylke: 'county, Norway', omr: 'area, Norway'}[g.t] || g.t, g}));
     const evs = EVENTS.filter(e => !e.live && (e.headline + ' ' + e.place).toLowerCase().includes(s)).slice(0, 5).map(e => ({kind: 'event', label: e.headline, sub: 'story', e}));
     res = evs.concat(places);
     box.innerHTML = res.length ? res.map((r, i) => `<li data-i="${i}">${esc(r.label)}<small>${esc(r.sub)}</small></li>`).join('') : '<li>No match</li>';
@@ -371,7 +374,7 @@ function buildSearch() {
   const go = r => {
     if (!r) return; box.hidden = true; q.blur(); document.body.classList.remove('menu');
     if (r.kind === 'event') { if (!inView(r.e)) { S.follow = false; setT(Math.min(S.tMax, r.e.learned + HOUR)); } select(r.e.id); }
-    else { select(null); globe.pointOfView({lat: r.g.lat, lng: r.g.lng, altitude: r.g.t === 'city' ? 0.35 : r.g.t === 'place' ? 0.6 : 0.9}, 900); }
+    else { select(null); globe.pointOfView({lat: r.g.lat, lng: r.g.lng, altitude: {city: 0.35, place: 0.6, kommune: 0.1, sted: 0.08, omr: 0.2, fylke: 0.3}[r.g.t] || 0.9}, 900); }
   };
   q.addEventListener('input', run);
   q.addEventListener('keydown', ev => {
@@ -454,11 +457,20 @@ function pause() { if (S.playing) { S.playing = false; cancelAnimationFrame(play
 /* ---------- boot ---------- */
 async function boot() {
   buildCats(); bindTimeline(); buildSearch();
-  const [cur, live, gaz, topo] = await Promise.all([
+  const [cur, live, gaz, topo, noGaz, fylker] = await Promise.all([
     getJSON('data/events.json', {events: []}), getJSON('data/live.json', {items: []}),
-    getJSON('data/gazetteer.json', []), getJSON('vendor/countries-110m.json', null)]);
-  GAZ = gaz; LIVE_META = live;
+    getJSON('data/gazetteer.json', []), getJSON('vendor/countries-110m.json', null),
+    getJSON('data/norway-places.json', []), getJSON('vendor/norway-fylker.geojson', null)]);
+  // Norwegian places first for same-named entries, but keep the world list for countries and capitals.
+  const world = new Set(gaz.map(g => g.n));
+  GAZ = gaz.concat(noGaz.filter(g => !world.has(g.n))); LIVE_META = live;
   if (topo) COUNTRIES = topojson.feature(topo, topo.objects.countries).features.map((f, i) => ({kind: 'country', i, name: f.properties.name, geometry: f.geometry}));
+  if (fylker && COUNTRIES.length) {
+    // Swap the coarse outline of mainland Norway for county outlines; keep Svalbard from the world map.
+    const no = COUNTRIES.find(c => c.name === 'Norway');
+    if (no && no.geometry.type === 'MultiPolygon') no.geometry = {type: 'MultiPolygon', coordinates: no.geometry.coordinates.filter(p => p[0][0][1] > 74)};
+    COUNTRIES = COUNTRIES.concat(fylker.features.map((f, j) => ({kind: 'country', i: no ? no.i : j, name: f.properties.name, geometry: f.geometry})));
+  }
   let liveItems = live.items || [];
   const stale = !live.generated || Date.now() - new Date(live.generated) > 3 * HOUR;
   EVENTS = (cur.events || []).map(normCurated).concat(liveItems.map(normLive));

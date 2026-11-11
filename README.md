@@ -21,6 +21,7 @@ Explore world news by place and time on an interactive 3D globe. First version: 
 | --- | --- | --- |
 | `data/events.json` | Curated events with sources, confidence levels and update history | Hand |
 | `data/live.json` | Automated feed items | `scripts/fetch-feeds.mjs`, hourly in GitHub Actions |
+| `data/norway-places.json` | Norwegian municipalities, towns, counties and regions for placing NRK items | Generated once |
 | `data/gazetteer.json` | Country, city and place coordinates for search and for locating feed items | Generated once |
 
 ### Live feeds
@@ -30,9 +31,22 @@ The workflow in `.github/workflows/pages.yml` runs every hour, refreshes `data/l
 - **USGS Earthquake Hazards Program**: earthquakes of magnitude 5.5 and above (public domain).
 - **NASA EONET**: open natural events such as storms, volcanoes and wildfires.
 - **GDACS**: orange and red disaster alerts.
+- **NRK**: top stories from NRK's 14 district feeds and the national feed, placed on the map of Norway (see below).
 - **UN News**: headlines, placed at country level by matching place names in the text. These carry a publication time only, and the panel says so.
 
 Live items are labelled as automated and not editorially reviewed. Only the headline, link and a short description from the feed are stored. If the scheduled job has not produced recent data, the page loads earthquakes directly from USGS in the browser.
+
+### NRK and Norwegian place matching
+
+NRK's feeds carry no coordinates, so each item is placed by finding a Norwegian place name in its headline or summary:
+
+- `data/norway-places.json` holds about 800 places: all 357 municipalities, some 500 towns and villages, the counties, and common regions such as Lofoten, Hardanger and Svalbard.
+- A name after a preposition ("i Bergen", "på Voss", "ved Otta") is the strongest signal. Bare names count only for municipalities, counties and larger towns, because many small place names are also surnames or ordinary words.
+- Where two places share a name (Våler, Herøy), the one inside the feed's own district wins.
+- If nothing matches, a district item is placed at the centre of its NRK district and says so. National items with no match are left out.
+- Every NRK item states in its panel why it was placed where it is. The marker shows where the story is about, to municipality level; it is not the exact scene.
+
+Mainland Norway is drawn with county outlines (`vendor/norway-fylker.geojson`) so the placement is readable when zoomed in.
 
 To add a feed, write a parser in `scripts/fetch-feeds.mjs` that returns items with `id, title, url, time, published, lat, lng, category` and add it to `FEEDS`. Check the provider's terms first.
 
@@ -87,4 +101,4 @@ node scripts/fetch-feeds.mjs  # optional: refresh data/live.json (Node 20+)
 
 ## Credits
 
-[globe.gl](https://github.com/vasturiano/globe.gl) and three.js (MIT) · country shapes from [world-atlas](https://github.com/topojson/world-atlas) / Natural Earth · satellite texture from NASA Blue Marble · feed data from USGS, NASA EONET, GDACS and UN News.
+[globe.gl](https://github.com/vasturiano/globe.gl) and three.js (MIT) · country shapes from [world-atlas](https://github.com/topojson/world-atlas) / Natural Earth · satellite texture from NASA Blue Marble · Norwegian county and municipality shapes from [robhop/fylker-og-kommuner](https://github.com/robhop/fylker-og-kommuner) (Kartverket data) · town coordinates from GeoNames via [cities.json](https://github.com/lutangar/cities.json) · feed data from USGS, NASA EONET, GDACS, NRK and UN News.

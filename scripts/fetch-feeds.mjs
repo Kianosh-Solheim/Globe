@@ -103,10 +103,86 @@ export function parseUNNews(xml) {
   }).filter(Boolean);
 }
 
+/* ---- NRK (Norway): district feeds, placed by matching Norwegian place names ---- */
+const NO = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'norway-places.json'), 'utf8'));
+const PREP = '(?:[Ii]|[Pp]å|[Vv]ed|[Ff]r[aå]|[Tt]il|[Uu]t[ae]nfor|[Nn]ær|[Mm]ot|[Gg]jennom|[Ff]orbi|(?:[Ss]ør|[Nn]ord|[Øø]st|[Vv]est) for)';
+const NO_RE = NO.flatMap(g => [g.n, ...(g.a || [])].map(n => ({g, n,
+  prep: new RegExp(`(?<![\\p{L}])${PREP}\\s+${esc(n)}(?![\\p{L}-])`, 'u'),
+  bare: g.w ? null : new RegExp(`(?<![\\p{L}-])${esc(n)}(?![\\p{L}-])`, 'u')})));
+// A name after a preposition ("i Bergen", "på Voss") is strong evidence. Bare names count only for
+// municipalities, counties and large towns, because many small place names are also surnames or common words.
+export function locateNorway(title, desc, fylker = []) {
+  let best = null;
+  for (const [text, inTitle] of [[title, 1], [desc, 0]]) {
+    for (const {g, n, prep, bare} of NO_RE) {
+      let m = prep.exec(text), score = 3;
+      if (!m && bare) { m = bare.exec(text); score = 2; }
+      if (!m) continue;
+      score += inTitle + (fylker.includes(g.f) ? 2 : 0) + (g.t === 'fylke' ? 0 : g.t === 'omr' ? 0.3 : 0.5) + Math.min(n.length, 12) / 100;
+      if (!best || score > best.score || (score === best.score && m.index < best.i)) best = {score, i: m.index, g, n, inTitle};
+    }
+  }
+  return best;
+}
+export function categoriseNo(text) {
+  const t = text.toLowerCase();
+  if (/(flom|skred|\bras\b|raset|brann|brenn|storm|uvær|ekstremvær|ulykke|ulukke|jordskjelv|kolli|forlis|omkom|krasj)/.test(t)) return 'disaster';
+  if (/(politi|drap|skutt|skyt|knivst|sikta|siktet|pågrep|tiltal|dømt|dømd|vold|\bran\b|ranet|trussel|narkotika|fengsel|retten|rettssak)/.test(t)) return 'security';
+  if (/(streik|demonstra|aksjon|protest)/.test(t)) return 'protest';
+  if (/(klima|miljø|utslipp|utslepp|vindkraft|naturvern|rovdyr|ulv|oppdrett|forurens)/.test(t)) return 'climate';
+  if (/(storting|regjering|ordfør|kommunestyr|fylkesting|\bvalg|statsbudsjett|minister|parti|\bfrp\b|\bap\b|høyre|høgre|\bsv\b|senterpartiet|budsjett)/.test(t)) return 'politics';
+  if (/(flyktning|asyl|nødhjelp)/.test(t)) return 'humanitarian';
+  return 'other';
+}
+const NRK_FEEDS = [
+  ['Buskerud', 'ostafjells/buskerud', ['33']], ['Troms og Finnmark', 'nordnytt', ['55', '56'], [69.65, 18.96]], ['Hedmark og Oppland', 'ho', ['34']],
+  ['Hordaland', 'hordaland', ['46'], [60.39, 5.32]], ['Sogn og Fjordane', 'sognogfjordane', ['46'], [61.45, 5.85]], ['Møre og Romsdal', 'mr', ['15']],
+  ['Nordland', 'nordland', ['18']], ['Rogaland', 'rogaland', ['11']], ['Sørlandet', 'sorlandet', ['42']], ['Telemark', 'ostafjells/telemark', ['40']],
+  ['Trøndelag', 'trondelag', ['50']], ['Vestfold', 'ostafjells/vestfold', ['39']], ['Østfold', 'ostfold', ['31']],
+  ['Østlandssendingen', 'ostlandssendingen', ['03', '32'], [59.91, 10.75]], ['Norge', '', []]
+];
+export function parseNRK(xml, [district, , fylker, centre]) {
+  return items(xml).map(x => {
+    const title = tag(x, 'title'), desc = tag(x, 'description'), link = tag(x, 'link') || tag(x, 'guid'), p = iso(tag(x, 'pubDate') || tag(x, 'dc:date'));
+    if (!title || !link || !p) return null;
+    const hit = locateNorway(title, desc, fylker);
+    let g, note;
+    if (hit) { g = hit.g; note = `Placed at ${hit.n} because the place is named in the ${hit.inTitle ? 'headline' : 'summary'}. The event itself may be somewhere else nearby.`; }
+    else if (fylker.length) {
+      const f = NO.find(o => o.t === 'fylke' && o.f === fylker[0]);
+      g = {n: district, lat: centre ? centre[0] : f.lat, lng: centre ? centre[1] : f.lng, r: 60};
+      note = `No place name was recognised in the text, so this is placed at the centre of the NRK ${district} district.`;
+    } else return null;
+    return {
+      id: 'nrk-' + ((link.match(/1\.(\d+)/) || [])[1] || Buffer.from(link).toString('base64url').slice(-14)), src: 'nrk', srcName: 'NRK' + (fylker.length ? ' ' + district : ''),
+      title, url: link, time: p, published: p, timeBasis: 'published', lat: g.lat, lng: g.lng, precision: 'approximate', radiusKm: g.r || 8,
+      category: categoriseNo(title + ' ' + desc), place: hit ? hit.n + (g.t === 'fylke' || g.t === 'omr' ? '' : ', Norway') : district + ', Norway', locNote: note, detail: clip(desc, 180), located: !!hit
+    };
+  }).filter(Boolean);
+}
+async function fetchNRK() {
+  const got = new Map(); let ok = 0, fail = 0;
+  for (const f of NRK_FEEDS) {
+    const url = `https://www.nrk.no/${f[1] ? f[1] + '/' : ''}toppsaker.rss`;
+    try {
+      const xml = await get(url);
+      if (!ok) console.log('nrk sample item tags:', [...new Set(((items(xml)[0] || '').match(/<[a-zA-Z:]+/g) || []))].join(' '));
+      for (const i of parseNRK(xml, f)) { const prev = got.get(i.id); if (!prev || (i.located && !prev.located)) got.set(i.id, i); }
+      ok++;
+    } catch (e) { fail++; console.warn(`nrk ${f[0]}: failed (${e.message || e})`); }
+  }
+  if (!ok) throw new Error('all NRK feeds failed');
+  const list = [...got.values()].filter(i => now - new Date(i.time) < 4 * 864e5).sort((a, b) => new Date(b.time) - new Date(a.time)).slice(0, 90);
+  console.log(`nrk: ${ok} feeds ok, ${fail} failed, ${list.length} items, ${list.filter(i => i.located).length} matched to a place`);
+  for (const i of list.slice(0, 12)) console.log(`  [${i.place}] ${i.title}`);
+  return list.map(({located, ...i}) => i);
+}
+
 const FEEDS = [
   {id: 'usgs', name: 'USGS', url: 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson', as: 'json', parse: parseUSGS},
   {id: 'eonet', name: 'NASA EONET', url: 'https://eonet.gsfc.nasa.gov/api/v3/events?status=open&days=10&limit=60', as: 'json', parse: parseEONET},
   {id: 'gdacs', name: 'GDACS', url: 'https://www.gdacs.org/xml/rss.xml', as: 'text', parse: parseGDACS},
+  {id: 'nrk', name: 'NRK', url: 'https://www.nrk.no/rss/', run: fetchNRK},
   {id: 'unnews', name: 'UN News', url: 'https://news.un.org/feed/subscribe/en/news/all/rss.xml', as: 'text', parse: parseUNNews}
 ];
 
@@ -114,8 +190,8 @@ async function main() {
   const sources = [], all = [];
   for (const f of FEEDS) {
     try {
-      const got = f.parse(await get(f.url, f.as)).filter(i => i.time && isFinite(i.lat) && isFinite(i.lng) && now - new Date(i.time) < MAX_AGE && new Date(i.time) <= now + 36e5);
-      all.push(...got.slice(0, 50)); sources.push({id: f.id, name: f.name, url: f.url, ok: true, count: got.length});
+      const got = (f.run ? await f.run() : f.parse(await get(f.url, f.as))).filter(i => i.time && isFinite(i.lat) && isFinite(i.lng) && now - new Date(i.time) < MAX_AGE && new Date(i.time) <= now + 36e5);
+      all.push(...got.slice(0, f.id === 'nrk' ? 90 : 50)); sources.push({id: f.id, name: f.name, url: f.url, ok: true, count: got.length});
       console.log(`${f.id}: ${got.length} items`);
     } catch (e) {
       sources.push({id: f.id, name: f.name, url: f.url, ok: false, error: String(e.message || e)});
