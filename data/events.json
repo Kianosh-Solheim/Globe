@@ -1,0 +1,992 @@
+{
+ "meta": {
+  "title": "Curated events, 1–11 November 2026",
+  "compiled": "2026-11-11T12:30:00Z",
+  "note": "Manually compiled from the linked reporting. Summaries are original paraphrases; follow the source links for the reporting itself. Where a source gives only a date, first-reported and update times are approximate to within the day."
+ },
+ "events": [
+  {
+   "id": "abu-dhabi-talks",
+   "category": "diplomacy",
+   "headline": "Russia, Ukraine and the US resume three-way peace talks in Abu Dhabi",
+   "place": "Abu Dhabi, United Arab Emirates",
+   "lat": 24.4539,
+   "lng": 54.3773,
+   "precision": "city",
+   "time": "2026-11-10T08:00:00Z",
+   "timePrecision": "day",
+   "learnedAt": "2026-11-10T09:50:00Z",
+   "status": "confirmed",
+   "summary": "Delegations from Russia, Ukraine and the United States opened a two-day round of US-mediated negotiations in the UAE capital, the first three-way meeting since February.",
+   "facts": [
+    {
+     "level": "confirmed",
+     "text": "The talks are scheduled for 10–11 November and are the first trilateral session since a round in Geneva in February.",
+     "by": "AP, Kyiv Independent"
+    },
+    {
+     "level": "confirmed",
+     "text": "Steve Witkoff and Jared Kushner lead the US side; Rustem Umerov heads Ukraine's delegation and Vladimir Medinsky Russia's.",
+     "by": "AP, ABC News"
+    },
+    {
+     "level": "unknown",
+     "text": "What, if anything, has been agreed on territory or security guarantees has not been made public."
+    }
+   ],
+   "updates": [
+    {
+     "at": "2026-11-10T13:00:00Z",
+     "text": "First day ended after roughly four hours; a second session was set for Wednesday.",
+     "by": "Interfax-Ukraine, RFE/RL"
+    },
+    {
+     "at": "2026-11-10T18:09:00Z",
+     "text": "Zelensky said the first day dealt largely with humanitarian questions, including prisoner exchanges and the return of civilians and children.",
+     "by": "AP",
+     "facts": [
+      {
+       "level": "reported",
+       "text": "A large prisoner exchange, described as 1,000 for 1,000 or more, was agreed in principle according to unnamed sources; details were still to be worked out.",
+       "by": "Interfax-Ukraine sources; a senior Ukrainian official speaking anonymously to AP"
+      }
+     ]
+    },
+    {
+     "at": "2026-11-11T10:02:00Z",
+     "text": "Umerov said the second day had begun, starting with a three-way session followed by a separate meeting with European representatives.",
+     "by": "Kyiv Independent, Interfax-Ukraine"
+    }
+   ],
+   "people": [
+    {
+     "name": "Steve Witkoff",
+     "role": "US special envoy"
+    },
+    {
+     "name": "Jared Kushner",
+     "role": "US delegation"
+    },
+    {
+     "name": "Rustem Umerov",
+     "role": "Head of Ukraine's delegation"
+    },
+    {
+     "name": "Vladimir Medinsky",
+     "role": "Head of Russia's delegation"
+    }
+   ],
+   "movement": {
+    "type": "diplomatic",
+    "label": "Delegations convene in Abu Dhabi",
+    "note": "Schematic. Lines join each delegation's capital to the venue to show who met where. They are not flight paths, and departure points and times were not reported.",
+    "legs": [
+     {
+      "from": {
+       "name": "Kyiv",
+       "lat": 50.45,
+       "lng": 30.52
+      },
+      "to": {
+       "name": "Abu Dhabi",
+       "lat": 24.4539,
+       "lng": 54.3773
+      }
+     },
+     {
+      "from": {
+       "name": "Moscow",
+       "lat": 55.75,
+       "lng": 37.62
+      },
+      "to": {
+       "name": "Abu Dhabi",
+       "lat": 24.4539,
+       "lng": 54.3773
+      }
+     },
+     {
+      "from": {
+       "name": "Washington",
+       "lat": 38.9,
+       "lng": -77.04
+      },
+      "to": {
+       "name": "Abu Dhabi",
+       "lat": 24.4539,
+       "lng": 54.3773
+      }
+     }
+    ]
+   },
+   "sources": [
+    {
+     "publisher": "AP via PBS News",
+     "title": "Russia and Ukraine hold nearly 4 hours of U.S.-mediated talks in Abu Dhabi",
+     "url": "https://www.pbs.org/newshour/world/russia-and-ukraine-hold-nearly-4-hours-of-u-s-mediated-talks-in-abu-dhabi",
+     "published": "2026-11-10T18:09:00Z"
+    },
+    {
+     "publisher": "RFE/RL",
+     "title": "Ukraine, Russia Negotiators Conclude First Day Of US-Led Peace Talks As Europe Seeks Role",
+     "url": "https://www.rferl.org/a/russia-ukraine-abu-dhabi-war-peace-talks/33894644.html",
+     "published": "2026-11-10T14:35:00Z"
+    },
+    {
+     "publisher": "Kyiv Independent",
+     "title": "2nd day of trilateral peace talks begins between Ukraine, Russia, US in Abu Dhabi",
+     "url": "https://kyivindependent.com/2nd-day-of-trilateral-peace-talks-begins-between-ukraine-russia-us-in-abu-dhabi/",
+     "published": "2026-11-11T10:01:58Z"
+    },
+    {
+     "publisher": "Interfax-Ukraine",
+     "title": "Second day of Abu Dhabi talks to begin with trilateral format involving U.S. and Russia - Umerov",
+     "url": "https://en.interfax.com.ua/news/general/1234562.html"
+    },
+    {
+     "publisher": "ABC News",
+     "title": "Russia, Ukraine and US meet for Abu Dhabi talks as Trump says war can 'end soon'",
+     "url": "https://abcnews.com/International/russia-ukraine-us-meet-abu-dhabi-talks-trump/story?id=137970621",
+     "published": "2026-11-10T10:00:00Z"
+    }
+   ],
+   "related": [
+    "kirishi-refinery",
+    "mius-bridge"
+   ]
+  },
+  {
+   "id": "kirishi-refinery",
+   "category": "conflict",
+   "headline": "Drone attack hits Kirishi oil refinery in Russia's Leningrad Oblast",
+   "place": "Kirishi, Leningrad Oblast, Russia",
+   "lat": 59.45,
+   "lng": 32.02,
+   "precision": "city",
+   "time": "2026-11-09T00:30:00Z",
+   "timePrecision": "overnight",
+   "learnedAt": "2026-11-09T04:05:00Z",
+   "status": "reported",
+   "summary": "A drone attack struck the Kinef refinery at Kirishi, one of Russia's largest, during the night of 8–9 November. The regional governor acknowledged the attack; Ukraine is reported to have carried it out.",
+   "facts": [
+    {
+     "level": "confirmed",
+     "text": "Leningrad Oblast governor Aleksandr Drozdenko confirmed a drone attack on the refinery.",
+     "by": "Kyiv Independent, citing the governor"
+    },
+    {
+     "level": "reported",
+     "text": "Ukrainian monitoring channels reported large explosions at the plant, which lies roughly 800 km north of Ukraine.",
+     "by": "Exilenova+ and Supernova+ channels, via Kyiv Independent"
+    },
+    {
+     "level": "unknown",
+     "text": "The launch area, the route flown and the extent of damage have not been established. No route is drawn for that reason."
+    }
+   ],
+   "people": [
+    {
+     "name": "Aleksandr Drozdenko",
+     "role": "Governor of Leningrad Oblast"
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Kyiv Independent",
+     "title": "Ukraine strikes Russia's second-largest oil refinery in overnight drone attack, Russian governor says",
+     "url": "https://kyivindependent.com/ukrainian-forces-reportedly-strike-russias-second-largest-oil-refinery-in-overnight-drone-attack/",
+     "published": "2026-11-09T04:05:17Z"
+    }
+   ],
+   "related": [
+    "mius-bridge",
+    "abu-dhabi-talks"
+   ]
+  },
+  {
+   "id": "mius-bridge",
+   "category": "conflict",
+   "headline": "Bridge over the Mius River and power stations reported hit in Rostov Oblast",
+   "place": "Mius River crossing on the R-280 highway, Rostov Oblast, Russia",
+   "lat": 47.33,
+   "lng": 38.9,
+   "precision": "approximate",
+   "radiusKm": 30,
+   "time": "2026-11-08T05:00:00Z",
+   "timePrecision": "morning",
+   "learnedAt": "2026-11-08T17:39:00Z",
+   "status": "reported",
+   "summary": "Ukrainian drones struck targets in Russia's Rostov Oblast on the morning of 8 November, according to the regional governor, including a bridge on a road linking the region with Russian-occupied parts of Ukraine.",
+   "facts": [
+    {
+     "level": "reported",
+     "text": "Drone debris damaged the bridge carrying the R-280 highway over the Mius River, and power stations were also hit.",
+     "by": "Rostov Oblast governor, via Kyiv Independent"
+    },
+    {
+     "level": "reported",
+     "text": "A monitoring channel published footage it said showed the strike and attributed it to an FP-2 drone. The footage has not been independently confirmed in the reporting used here.",
+     "by": "Exilenova-Plus channel, via Kyiv Independent"
+    },
+    {
+     "level": "unknown",
+     "text": "The exact crossing point is not specified in the reporting, so the location is drawn as an approximate area."
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Kyiv Independent",
+     "title": "Ukrainian drones hit key bridge, power stations in Russia's Rostov Oblast, governor says",
+     "url": "https://kyivindependent.com/ukrainian-drones-hit-key-bridge-power-stations-in-russias-rostov-oblast-governor-says/",
+     "published": "2026-11-08T17:39:36Z"
+    }
+   ],
+   "related": [
+    "kirishi-refinery",
+    "abu-dhabi-talks"
+   ]
+  },
+  {
+   "id": "cop31-opens",
+   "category": "climate",
+   "headline": "COP31 climate summit opens in Antalya",
+   "place": "Antalya, Türkiye",
+   "lat": 36.8969,
+   "lng": 30.7133,
+   "precision": "city",
+   "time": "2026-11-09T07:00:00Z",
+   "timePrecision": "morning",
+   "learnedAt": "2026-11-09T07:00:00Z",
+   "status": "confirmed",
+   "summary": "The UN climate conference began on Türkiye's Mediterranean coast with nearly 200 countries represented. The hosts are framing it as a summit about carrying out existing pledges rather than setting new targets.",
+   "facts": [
+    {
+     "level": "confirmed",
+     "text": "The conference runs from 9 to 20 November. Türkiye's environment minister Murat Kurum presides, while Australia's Chris Bowen steers the negotiations under a shared arrangement agreed at COP30.",
+     "by": "UN News"
+    },
+    {
+     "level": "confirmed",
+     "text": "The United States is not taking part.",
+     "by": "AP"
+    },
+    {
+     "level": "reported",
+     "text": "Attendance estimates differ: UN News expected more than 90,000 people; other outlets cite more than 100,000.",
+     "by": "UN News; other press"
+    }
+   ],
+   "updates": [
+    {
+     "at": "2026-11-11T06:00:00Z",
+     "text": "A two-day leaders' segment was scheduled for 11–12 November.",
+     "by": "TRT World"
+    }
+   ],
+   "people": [
+    {
+     "name": "Murat Kurum",
+     "role": "COP31 President"
+    },
+    {
+     "name": "Chris Bowen",
+     "role": "President of negotiations"
+    },
+    {
+     "name": "Simon Stiell",
+     "role": "UN Climate Change Executive Secretary"
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "UN News",
+     "title": "COP31 opens in Antalya: Can climate promises finally deliver results?",
+     "url": "https://news.un.org/en/story/2026/11/1168763",
+     "published": "2026-11-09"
+    },
+    {
+     "publisher": "AP via PBS News",
+     "title": "COP31 climate summit begins after disastrous year of extreme weather",
+     "url": "https://www.pbs.org/newshour/science/cop31-climate-summit-begins-after-disastrous-year-of-extreme-weather"
+    },
+    {
+     "publisher": "TRT World",
+     "title": "COP31 climate summit kicks off in Türkiye amid growing calls for more decisive action",
+     "url": "https://www.trtworld.com/article/80e31443493f"
+    }
+   ],
+   "related": []
+  },
+  {
+   "id": "krakow-shooting",
+   "category": "security",
+   "headline": "Gunman kills six in Kraków's Main Market Square",
+   "place": "Main Market Square, Kraków, Poland",
+   "lat": 50.0617,
+   "lng": 19.9373,
+   "precision": "exact",
+   "time": "2026-11-07T11:00:00Z",
+   "timePrecision": "midday",
+   "learnedAt": "2026-11-07T12:00:00Z",
+   "status": "confirmed",
+   "summary": "A man drove into Kraków's central square around midday on Saturday and fired from his car at people nearby. Police shot and arrested him within minutes.",
+   "facts": [
+    {
+     "level": "reported",
+     "text": "First reports in Polish media put the death toll at five or more.",
+     "by": "Polish media, via CNBC"
+    }
+   ],
+   "updates": [
+    {
+     "at": "2026-11-07T20:00:00Z",
+     "text": "Toll established at six dead, four women and two men, with about 15 wounded; two police officers were also hurt.",
+     "by": "Kraków police, via CNN and CBS News",
+     "replaceFacts": [
+      {
+       "level": "confirmed",
+       "text": "Six people were killed and around 15 wounded. Two police officers who stopped the attacker were injured.",
+       "by": "Kraków police, via CNN and CBS News"
+      }
+     ]
+    },
+    {
+     "at": "2026-11-08T12:00:00Z",
+     "text": "Three relatives of the attacker were found dead at his home in Ostrowiec Świętokrzyski. The interior minister said he held radical nationalist views.",
+     "by": "CBS News",
+     "facts": [
+      {
+       "level": "confirmed",
+       "text": "The bodies of the attacker's mother, father and sister were found at his home.",
+       "by": "Polish authorities, via CBS News"
+      }
+     ]
+    },
+    {
+     "at": "2026-11-09T03:30:00Z",
+     "text": "The attacker, 24, died in hospital at 04:30 local time. Officials stepped back from earlier statements about motive.",
+     "by": "Polish police, via NBC News and CNBC",
+     "facts": [
+      {
+       "level": "disputed",
+       "text": "Motive. The interior minister first pointed to far-right ideology; on Monday officials declined to name a motive after opposition politicians challenged the basis for the claim.",
+       "by": "CNBC, CBS News"
+      }
+     ]
+    },
+    {
+     "at": "2026-11-10T12:00:00Z",
+     "text": "The justice minister said the attacker had visited websites about Anders Behring Breivik and described a strong indication of right-wing extremism. The investigation continues.",
+     "by": "Al Jazeera"
+    }
+   ],
+   "people": [
+    {
+     "name": "Waldemar Żurek",
+     "role": "Justice Minister of Poland"
+    },
+    {
+     "name": "Marcin Kierwiński",
+     "role": "Interior Minister of Poland"
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "CNN",
+     "title": "Gunman who killed at least 6 in Kraków mass shooting dies in hospital",
+     "url": "https://www.cnn.com/2026/11/09/europe/krakow-shooting-poland-gunman-dead-intl-hnk",
+     "published": "2026-11-09"
+    },
+    {
+     "publisher": "CNBC",
+     "title": "Krakow mass shooting assailant dies in hospital, Polish police say",
+     "url": "https://www.cnbc.com/2026/11/09/krakow-mass-shooting-assailant-dies.html",
+     "published": "2026-11-09"
+    },
+    {
+     "publisher": "CBS News",
+     "title": "Gunman behind mass shooting in Krakow, Poland, dies in hospital, police say",
+     "url": "https://www.cbsnews.com/news/poland-mourns-krakow-mass-shooting-victims-terrorism-probe/"
+    },
+    {
+     "publisher": "Al Jazeera",
+     "title": "Poland gunman fascinated by Norway's neo-Nazi mass killer Breivik",
+     "url": "https://www.aljazeera.com/news/2026/11/10/polish-gunman-visited-websites-about-norwegian-neo-nazi-serial-killer",
+     "published": "2026-11-10"
+    }
+   ],
+   "related": []
+  },
+  {
+   "id": "egypt-train",
+   "category": "disaster",
+   "headline": "Two passenger trains collide at Al-Ayyat, south of Cairo",
+   "place": "Al-Ayyat, Giza Governorate, Egypt",
+   "lat": 29.62,
+   "lng": 31.26,
+   "precision": "approximate",
+   "radiusKm": 12,
+   "time": "2026-11-08T08:00:00Z",
+   "timePrecision": "day",
+   "learnedAt": "2026-11-08T10:00:00Z",
+   "status": "confirmed",
+   "summary": "A train running from Giza to Fayoum struck the rear of a stationary Cairo–Aswan service between Kafr Ammar and Al-Raqqa stations, derailing several carriages.",
+   "facts": [
+    {
+     "level": "confirmed",
+     "text": "The moving train hit the last carriage of a stationary train on the same track.",
+     "by": "Egyptian National Railways Authority"
+    },
+    {
+     "level": "reported",
+     "text": "Early Health Ministry figures: at least four dead and 88 injured.",
+     "by": "Health Ministry, via AP/CBS News"
+    }
+   ],
+   "updates": [
+    {
+     "at": "2026-11-08T19:00:00Z",
+     "text": "Toll revised upward to at least seven dead, a train driver among them. President Sisi ordered an investigation.",
+     "by": "Health Ministry, via CNN",
+     "replaceFacts": [
+      {
+       "level": "confirmed",
+       "text": "The moving train hit the last carriage of a stationary train on the same track.",
+       "by": "Egyptian National Railways Authority"
+      },
+      {
+       "level": "confirmed",
+       "text": "At least seven people were killed, including a train driver.",
+       "by": "Health Ministry, via CNN"
+      },
+      {
+       "level": "reported",
+       "text": "Injury counts differ between reports: 112 in some, more than 125 in others.",
+       "by": "CNN; Al Jazeera"
+      },
+      {
+       "level": "unknown",
+       "text": "The cause is under investigation."
+      }
+     ]
+    }
+   ],
+   "people": [
+    {
+     "name": "Abdel Fattah el-Sisi",
+     "role": "President of Egypt"
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "CNN",
+     "title": "Two trains collide in Egypt, killing 7 people and injuring more than 100, authorities say",
+     "url": "https://www.cnn.com/2026/11/08/africa/egypt-train-collision-deaths-intl",
+     "published": "2026-11-08"
+    },
+    {
+     "publisher": "Al Jazeera",
+     "title": "Train crash kills seven, injures dozens near Egypt's Cairo city",
+     "url": "https://www.aljazeera.com/news/2026/11/8/train-crash-kills-four-injures-dozens-near-egypts-cairo-city",
+     "published": "2026-11-08"
+    },
+    {
+     "publisher": "CBS News / AP",
+     "title": "Trains collide in Egypt, killing at least 7 people and injuring more than 100",
+     "url": "https://www.cbsnews.com/news/trains-collision-egypt-giza/",
+     "published": "2026-11-08T19:00:00Z"
+    }
+   ],
+   "related": []
+  },
+  {
+   "id": "senegal-boat",
+   "category": "humanitarian",
+   "headline": "Migrant boat capsizes off north-west Senegal",
+   "place": "Off Loumpoul, Kébémer department, Senegal",
+   "lat": 15.33,
+   "lng": -16.95,
+   "precision": "approximate",
+   "radiusKm": 35,
+   "time": "2026-11-07T12:00:00Z",
+   "timePrecision": "day",
+   "learnedAt": "2026-11-08T13:32:00Z",
+   "status": "confirmed",
+   "summary": "A wooden pirogue carrying migrants capsized on Saturday between Dakar and Saint-Louis. It was reported to be heading for Spain's Canary Islands.",
+   "facts": [
+    {
+     "level": "confirmed",
+     "text": "At least 34 people died and one person was rescued.",
+     "by": "Senegalese interior ministry and the APS news agency"
+    },
+    {
+     "level": "reported",
+     "text": "The boat was bound for the Canary Islands.",
+     "by": "BBC, Al Jazeera"
+    },
+    {
+     "level": "unknown",
+     "text": "How many people were aboard, how many are missing, and where the boat set out from. No route is drawn for that reason."
+    }
+   ],
+   "updates": [
+    {
+     "at": "2026-11-09T08:17:00Z",
+     "text": "Death toll reported at 39 or more.",
+     "by": "BBC, citing APS",
+     "replaceFacts": [
+      {
+       "level": "reported",
+       "text": "The toll rose from at least 34 to at least 39 in later reports; one person was rescued.",
+       "by": "APS, via BBC"
+      },
+      {
+       "level": "reported",
+       "text": "The boat was bound for the Canary Islands.",
+       "by": "BBC, Al Jazeera"
+      },
+      {
+       "level": "unknown",
+       "text": "How many people were aboard, how many are missing, and where the boat set out from. No route is drawn for that reason."
+      }
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Al Jazeera via Yahoo News",
+     "title": "At least 34 dead as small boat sinks off Senegal",
+     "url": "https://www.yahoo.com/news/world/articles/least-21-dead-small-boat-133217997.html",
+     "published": "2026-11-08T13:32:00Z"
+    },
+    {
+     "publisher": "Saudi Gazette",
+     "title": "34 dead, several missing after Europe-bound migrant boat sinks off Senegal",
+     "url": "https://saudigazette.com.sa/article/666106/world/at-least-34-dead-as-europe-bound-migrant-boat-sinks-off-senegal",
+     "published": "2026-11-09T09:14:00Z"
+    },
+    {
+     "publisher": "BBC via Bundle",
+     "title": "Canary Islands: 39 dead after migrant boat sinks off Senegal en route to Europe",
+     "url": "https://www.bundle.app/en/breaking-news/canary-islands-39-dead-after-migrant-boat-sinks-off-senegal-en-route-to-europe-48C4971D-2F0C-5E94-9755-7DDA3771E7E4",
+     "published": "2026-11-09T08:16:57Z"
+    }
+   ],
+   "related": []
+  },
+  {
+   "id": "south-africa-elections",
+   "category": "politics",
+   "headline": "South Africa's local elections: ANC falls to about 31 per cent",
+   "place": "National Results Operation Centre, Midrand, South Africa",
+   "lat": -25.99,
+   "lng": 28.13,
+   "precision": "city",
+   "time": "2026-11-04T05:00:00Z",
+   "timePrecision": "day",
+   "learnedAt": "2026-11-04T05:00:00Z",
+   "status": "confirmed",
+   "summary": "South Africans voted for municipal councils on 4 November, with special votes on the two preceding days. 10,526 seats in 213 councils were contested.",
+   "facts": [
+    {
+     "level": "confirmed",
+     "text": "Voting took place on 4 November, with special votes on 2–3 November.",
+     "by": "Electoral Commission (IEC), via Newsday"
+    },
+    {
+     "level": "unknown",
+     "text": "Results were not yet declared."
+    }
+   ],
+   "updates": [
+    {
+     "at": "2026-11-05T13:11:00Z",
+     "text": "With about half of voting districts counted, provisional figures put the ANC near 32 per cent. The IEC stressed that nothing was final until declared.",
+     "by": "IEC dashboard, via press",
+     "replaceFacts": [
+      {
+       "level": "confirmed",
+       "text": "Voting took place on 4 November, with special votes on 2–3 November.",
+       "by": "Electoral Commission (IEC), via Newsday"
+      },
+      {
+       "level": "reported",
+       "text": "Provisional count at the halfway mark: ANC about 31.8 per cent.",
+       "by": "IEC live results, via press"
+      }
+     ]
+    },
+    {
+     "at": "2026-11-08T18:00:00Z",
+     "text": "The IEC declared the elections free and fair and announced final results.",
+     "by": "SAnews.gov.za",
+     "replaceFacts": [
+      {
+       "level": "confirmed",
+       "text": "Final result: ANC 30.76 per cent, down from 45.59 per cent in 2021; it remains the largest party.",
+       "by": "IEC, via BusinessTech and Newsday"
+      },
+      {
+       "level": "confirmed",
+       "text": "Turnout was 52 per cent, about 14.9 million voters, up 6.1 points on 2021.",
+       "by": "IEC, via SAnews.gov.za"
+      },
+      {
+       "level": "confirmed",
+       "text": "Only 74 of 213 councils have an outright majority; 139 will need coalitions.",
+       "by": "Newsday"
+      },
+      {
+       "level": "reported",
+       "text": "One voting centre faces a re-vote after ballots were destroyed.",
+       "by": "BusinessTech"
+      }
+     ]
+    }
+   ],
+   "people": [
+    {
+     "name": "Mosotho Moepya",
+     "role": "IEC Chairperson"
+    },
+    {
+     "name": "Fikile Mbalula",
+     "role": "ANC Secretary-General"
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "SAnews.gov.za",
+     "title": "IEC declares LGE 2026 Free and Fair",
+     "url": "https://www.sanews.gov.za/south-africa/iec-declares-lge-2026-free-and-fair",
+     "published": "2026-11-08"
+    },
+    {
+     "publisher": "BusinessTech",
+     "title": "2026 election final results announced",
+     "url": "https://businesstech.co.za/news/government/883205/final-2026-election-results-announced/",
+     "published": "2026-11-08"
+    },
+    {
+     "publisher": "Newsday",
+     "title": "2026 Final Election Results: ANC, DA, MK Party, EFF, and ActionSA",
+     "url": "https://newsday.co.za/south-africa/36519/2026-final-election-results-anc-da-mk-party-eff-and-actionsa/"
+    }
+   ],
+   "related": []
+  },
+  {
+   "id": "hormuz-tankers",
+   "category": "conflict",
+   "headline": "Iran's Revolutionary Guards say tankers caught fire in the Strait of Hormuz",
+   "place": "Strait of Hormuz",
+   "lat": 26.45,
+   "lng": 56.45,
+   "precision": "approximate",
+   "radiusKm": 70,
+   "time": "2026-11-04T18:00:00Z",
+   "timePrecision": "evening",
+   "learnedAt": "2026-11-05T04:21:00Z",
+   "status": "disputed",
+   "summary": "Iran's IRGC said two oil tankers and a tugboat caught fire in separate incidents on Wednesday evening after using routes through the strait that Iran does not authorise. The account comes from one party to the conflict.",
+   "facts": [
+    {
+     "level": "reported",
+     "text": "One tanker struck a mine south of the strait; a second caught fire in the eastern part, as did a tug that came to help.",
+     "by": "IRGC statement, via Reuters"
+    },
+    {
+     "level": "unknown",
+     "text": "The IRGC did not name the vessels, their flags or owners, or give casualties or damage.",
+     "by": "IranWire"
+    }
+   ],
+   "updates": [
+    {
+     "at": "2026-11-05T12:00:00Z",
+     "text": "Iran's army said three more tankers had struck mines east of the strait, bringing the Iranian count to five tankers and a tug.",
+     "by": "IRNA, via Al Jazeera"
+    },
+    {
+     "at": "2026-11-08T12:04:00Z",
+     "text": "The IRGC said three further tankers were ablaze. Separately, the UK maritime agency UKMTO reported a tanker on fire off Khasab, Oman, with its crew evacuated, and another hit by an unidentified projectile.",
+     "by": "Al Arabiya",
+     "facts": [
+      {
+       "level": "confirmed",
+       "text": "UKMTO independently reported at least one tanker fire in the strait on 7 November.",
+       "by": "UKMTO, via Al Arabiya"
+      },
+      {
+       "level": "disputed",
+       "text": "The total number of ships hit. UKMTO has said many ships no longer report attacks, so counts cannot be reconciled.",
+       "by": "UKMTO, via Al Jazeera"
+      }
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Reuters via Yahoo News",
+     "title": "Iran's IRGC says two tankers and tugboat caught fire in Strait of Hormuz",
+     "url": "https://www.yahoo.com/news/articles/irans-irgc-says-two-tankers-042107548.html",
+     "published": "2026-11-05T04:21:00Z"
+    },
+    {
+     "publisher": "Al Jazeera",
+     "title": "Iran says tankers struck in Hormuz amid fears of new US attack",
+     "url": "https://www.aljazeera.com/news/2026/11/5/iran-says-tankers-struck-in-hormuz-amid-fears-of-new-us-attack",
+     "published": "2026-11-05"
+    },
+    {
+     "publisher": "Al Arabiya",
+     "title": "Iran says three tankers caught fire in Strait of Hormuz",
+     "url": "https://english.alarabiya.net/News/middle-east/2026/11/08/iran-says-three-tankers-caught-fire-in-strait-of-hormuz",
+     "published": "2026-11-08T12:04:00Z"
+    },
+    {
+     "publisher": "IranWire",
+     "title": "IRGC Reports Tanker Fires in Hormuz and Capture of Two U.S. Drones",
+     "url": "https://iranwire.com/en/news/159824-irgc-reports-tanker-fires-in-hormuz-and-capture-of-two-us-drones/",
+     "published": "2026-11-05"
+    }
+   ],
+   "related": []
+  },
+  {
+   "id": "shizuoka-quake",
+   "category": "disaster",
+   "headline": "Earthquake in western Shizuoka injures at least 24",
+   "place": "Western Shizuoka Prefecture, Japan",
+   "lat": 34.85,
+   "lng": 137.75,
+   "precision": "approximate",
+   "radiusKm": 40,
+   "time": "2026-11-07T16:04:00Z",
+   "timePrecision": "exact",
+   "learnedAt": "2026-11-07T16:30:00Z",
+   "status": "confirmed",
+   "summary": "An earthquake struck central Japan at 01:04 local time on 8 November, disrupting rail services. The strongest shaking was recorded at Chita in Aichi Prefecture.",
+   "facts": [
+    {
+     "level": "confirmed",
+     "text": "No deaths and no tsunami warning were reported; the Hamaoka nuclear plant showed no abnormalities.",
+     "by": "Beinsure, citing Japanese authorities"
+    },
+    {
+     "level": "reported",
+     "text": "At least 24 people were injured; the figure is provisional.",
+     "by": "Local media, via Beinsure"
+    },
+    {
+     "level": "disputed",
+     "text": "Magnitude. Japan's Meteorological Agency gave a preliminary 5.7; the US Geological Survey measured 5.5.",
+     "by": "JMA; USGS"
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Beinsure",
+     "title": "Japan earthquake 2026: Magnitude 5.7 quake injures 24 in Shizuoka",
+     "url": "https://beinsure.com/news/japan-earthquake-2026-magnitude-5-7-quake-injures-24-in-shizuoka",
+     "published": "2026-11-08"
+    }
+   ],
+   "related": []
+  },
+  {
+   "id": "us-southwest-floods",
+   "category": "disaster",
+   "headline": "Flooding forces evacuations across the US Southwest",
+   "place": "Four Corners region: Arizona, Colorado, New Mexico",
+   "lat": 36.2,
+   "lng": -109.6,
+   "precision": "approximate",
+   "radiusKm": 280,
+   "time": "2026-11-01T12:00:00Z",
+   "timePrecision": "day",
+   "learnedAt": "2026-11-01T18:00:00Z",
+   "status": "confirmed",
+   "summary": "Heavy rain on 1 November fell on already saturated ground, closing roads and prompting mandatory evacuations in parts of Arizona, Colorado and New Mexico.",
+   "facts": [
+    {
+     "level": "confirmed",
+     "text": "Rising water in Oak Creek at Sedona, Arizona, trapped residents, some of whom were lifted from rooftops by helicopter.",
+     "by": "Center for Disaster Philanthropy"
+    },
+    {
+     "level": "reported",
+     "text": "The San Juan River at Pagosa Springs, Colorado, was forecast to crest at 21.9 feet.",
+     "by": "Center for Disaster Philanthropy"
+    }
+   ],
+   "updates": [
+    {
+     "at": "2026-11-03T18:00:00Z",
+     "text": "Waters began to recede, leaving mud and damaged homes; clean-up started in some communities.",
+     "by": "AP, via US News"
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Center for Disaster Philanthropy",
+     "title": "What we're watching: Weekly disaster update, November 2, 2026",
+     "url": "https://disasterphilanthropy.org/blog/what-were-watching-weekly-disaster-update-november-2-2026/",
+     "published": "2026-11-03"
+    },
+    {
+     "publisher": "AP via US News",
+     "title": "Natural Disasters (AP coverage index)",
+     "url": "https://www.usnews.com/topics/subjects/natural_disasters"
+    }
+   ],
+   "related": []
+  },
+  {
+   "id": "us-midterms",
+   "category": "politics",
+   "headline": "US midterm elections: Democrats win both chambers of Congress",
+   "place": "Washington, DC, United States",
+   "lat": 38.8899,
+   "lng": -77.0091,
+   "precision": "city",
+   "time": "2026-11-03T12:00:00Z",
+   "timePrecision": "day",
+   "learnedAt": "2026-11-04T06:00:00Z",
+   "status": "confirmed",
+   "summary": "The Democratic Party took control of the House and the Senate in the 3 November midterm elections. Governments abroad responded by assessing what the change could mean for US foreign policy.",
+   "facts": [
+    {
+     "level": "confirmed",
+     "text": "Democrats won majorities in both chambers.",
+     "by": "Al Jazeera"
+    },
+    {
+     "level": "reported",
+     "text": "Counting continued in some races a week later, including a close Senate contest in Mississippi.",
+     "by": "Democracy Now, via Havana Times"
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Al Jazeera",
+     "title": "'Seismic shift': World reacts to US midterm election results",
+     "url": "https://www.aljazeera.com/news/2026/11/4/seismic-shift-world-reacts-to-us-midterm-election-results",
+     "published": "2026-11-04"
+    },
+    {
+     "publisher": "Wikipedia",
+     "title": "2026 United States elections",
+     "url": "https://en.wikipedia.org/wiki/2026_United_States_elections"
+    }
+   ],
+   "related": []
+  },
+  {
+   "id": "aliaga-steelworks",
+   "category": "disaster",
+   "headline": "Explosion and fire at steelworks in Aliağa, western Türkiye",
+   "place": "Habaş plant, Aliağa, İzmir Province, Türkiye",
+   "lat": 38.8,
+   "lng": 26.97,
+   "precision": "city",
+   "time": "2026-11-08T12:00:00Z",
+   "timePrecision": "uncertain",
+   "learnedAt": "2026-11-09T10:00:00Z",
+   "status": "reported",
+   "summary": "An explosion and fire at an iron and steel plant killed six workers and injured 13, two of them critically, officials said. Rescuers were searching for eight people still missing.",
+   "facts": [
+    {
+     "level": "reported",
+     "text": "Six dead, 13 injured and eight missing at the time of the report; an investigation was opened.",
+     "by": "Turkish officials, via Morning Star"
+    },
+    {
+     "level": "unknown",
+     "text": "The date is not pinned down in the reporting used here: the event is placed on 8 November but may have been the 9th."
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Morning Star",
+     "title": "World in brief: November 10, 2026",
+     "url": "https://morningstaronline.co.uk/article/world-brief-november-10-2026",
+     "published": "2026-11-09"
+    }
+   ],
+   "related": []
+  },
+  {
+   "id": "bolivia-teachers",
+   "category": "protest",
+   "headline": "Bolivian urban teachers begin 48-hour strike",
+   "place": "La Paz, Bolivia",
+   "lat": -16.5,
+   "lng": -68.15,
+   "precision": "country",
+   "radiusKm": 250,
+   "time": "2026-11-08T13:00:00Z",
+   "timePrecision": "uncertain",
+   "learnedAt": "2026-11-09T10:00:00Z",
+   "status": "reported",
+   "summary": "Teachers in Bolivia's cities walked out for two days against government plans to hand responsibility for education to regional authorities. Some are also on hunger strike.",
+   "facts": [
+    {
+     "level": "reported",
+     "text": "Teachers argue decentralisation would deepen inequality and comes without funding guarantees.",
+     "by": "Morning Star"
+    },
+    {
+     "level": "unknown",
+     "text": "The strike is nationwide in urban areas; the marker sits on La Paz for convenience and the start date (8 or 9 November) is not pinned down in the reporting used here."
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "Morning Star",
+     "title": "World in brief: November 10, 2026",
+     "url": "https://morningstaronline.co.uk/article/world-brief-november-10-2026",
+     "published": "2026-11-09"
+    }
+   ],
+   "related": []
+  },
+  {
+   "id": "north-sumatra-floods",
+   "category": "disaster",
+   "headline": "Floods affect thousands in North Sumatra",
+   "place": "Deli Serdang and Serdang Bedagai, North Sumatra, Indonesia",
+   "lat": 3.45,
+   "lng": 98.85,
+   "precision": "approximate",
+   "radiusKm": 45,
+   "time": "2026-11-05T06:00:00Z",
+   "timePrecision": "day",
+   "learnedAt": "2026-11-06T06:00:00Z",
+   "status": "confirmed",
+   "summary": "Flooding on 5 and 7 November affected about 9,600 people in two North Sumatra regencies, according to Indonesia's disaster agency.",
+   "facts": [
+    {
+     "level": "confirmed",
+     "text": "About 9,600 people in 2,400 families were affected.",
+     "by": "BNPB, via the AHA Centre"
+    }
+   ],
+   "updates": [
+    {
+     "at": "2026-11-09T06:00:00Z",
+     "text": "Indonesia's weather agency placed North Sumatra on its highest alert for very heavy to extreme rain from 9 to 12 November. Flooding also reached Gayo Lues in Aceh on 8 November.",
+     "by": "BMKG and BNPB, via the AHA Centre"
+    }
+   ],
+   "sources": [
+    {
+     "publisher": "AHA Centre",
+     "title": "Weekly Disaster Update 2 – 8 November 2026",
+     "url": "https://ahacentre.org/weekly-disaster-update/weekly-disaster-update-2-8-november-2026/"
+    }
+   ],
+   "related": []
+  }
+ ]
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>World News Globe</title>
+<meta name="description" content="Explore world news by place and time on an interactive 3D globe.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='%230b1220' stroke='%233dd6c5' stroke-width='2'/%3E%3Cpath d='M3 16h26M16 3c5 4 5 22 0 26M16 3c-5 4-5 22 0 26' fill='none' stroke='%233dd6c5' stroke-width='1.4'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header id="top">
+  <button id="menuBtn" class="icon-btn" aria-label="Search and filters" aria-expanded="false">☰</button>
+  <div class="brand">World News Globe</div>
+  <div id="mode" class="mode" role="status" aria-live="polite"><span class="dot"></span><span id="modeText">Loading…</span></div>
+  <div class="spacer"></div>
+  <div class="seg" id="knowSeg" role="group" aria-label="Knowledge view">
+    <button data-v="then" title="Show only what had been reported by the selected time">As reported then</button>
+    <button data-v="retro" title="Show events with all later updates and corrections">Retrospective</button>
+  </div>
+  <div class="seg" id="styleSeg" role="group" aria-label="Map style">
+    <button data-v="dark">Dark</button>
+    <button data-v="political">Political</button>
+    <button data-v="satellite">Satellite</button>
+  </div>
+</header>
+
+<aside id="left" aria-label="Search and filters">
+  <div class="search">
+    <input id="q" type="search" placeholder="Search a place or story" autocomplete="off" aria-label="Search a place or story">
+    <ul id="qres" hidden></ul>
+  </div>
+  <h2>Topics</h2>
+  <div id="cats"></div>
+  <div class="row-btns"><button id="catAll" class="link">All</button><button id="catNone" class="link">None</button></div>
+  <h2>Layers</h2>
+  <label class="chk"><input type="checkbox" id="lyCurated" checked><span class="sw sw-cur"></span>Curated stories <em id="nCur"></em></label>
+  <label class="chk"><input type="checkbox" id="lyLive" checked><span class="sw sw-live"></span>Live feeds, automated <em id="nLive"></em></label>
+  <p id="liveInfo" class="fine"></p>
+  <h2>Reading the map</h2>
+  <ul class="legend">
+    <li><span class="lg lg-pin"></span>Located event</li>
+    <li><span class="lg lg-area"></span>Approximate area, not a precise point</li>
+    <li><span class="lg lg-cluster">3</span>Several events; zoom in to separate</li>
+    <li><span class="lg lg-arc"></span>Schematic movement, not a tracked route</li>
+  </ul>
+  <ul class="legend conf">
+    <li><b class="lv confirmed">Confirmed</b> stated by officials or agreed across sources</li>
+    <li><b class="lv reported">Reported</b> attributed to a named source</li>
+    <li><b class="lv disputed">Disputed</b> accounts differ</li>
+    <li><b class="lv unknown">Unknown</b> not established</li>
+  </ul>
+  <p class="fine">First version. A small, manually compiled set of sourced events, plus automated open-data feeds. <a href="https://github.com/Kianosh-Solheim/Globe#readme" target="_blank" rel="noopener">About and sources</a></p>
+</aside>
+
+<main id="stage">
+  <div id="globe"></div>
+  <div id="overlay" aria-hidden="true"></div>
+  <div id="mapNote" class="map-note" hidden></div>
+  <div id="schematic" class="map-chip" hidden>Schematic movement · not a tracked route</div>
+  <div id="loading">Loading the globe…</div>
+</main>
+
+<aside id="right" aria-label="Story">
+  <div id="panel"></div>
+</aside>
+
+<footer id="timeline">
+  <div class="tl-controls">
+    <button id="stepBack" class="icon-btn" title="Back one hour" aria-label="Back one hour">−1h</button>
+    <button id="play" class="icon-btn play" title="Play (space)" aria-label="Play">▶</button>
+    <button id="stepFwd" class="icon-btn" title="Forward one hour" aria-label="Forward one hour">+1h</button>
+    <label class="sel">Speed
+      <select id="speed">
+        <option value="3600000">1 hour / s</option>
+        <option value="21600000" selected>6 hours / s</option>
+        <option value="86400000">1 day / s</option>
+      </select>
+    </label>
+    <label class="sel">Showing
+      <select id="win">
+        <option value="86400000">last 24 hours</option>
+        <option value="259200000">last 3 days</option>
+        <option value="604800000">last 7 days</option>
+        <option value="1209600000" selected>last 14 days</option>
+        <option value="0">everything so far</option>
+      </select>
+    </label>
+    <label class="sel">Date <input type="date" id="date"></label>
+    <div id="clock" class="clock"></div>
+    <button id="goLive" class="live-btn">● Live</button>
+  </div>
+  <div class="tl-track">
+    <div id="ticks"></div>
+    <div id="days"></div>
+    <input id="scrub" type="range" min="0" max="1000" step="1" value="1000" aria-label="Timeline">
+  </div>
+</footer>
+
+<script src="vendor/globe.gl.min.js"></script>
+<script src="vendor/topojson-client.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
