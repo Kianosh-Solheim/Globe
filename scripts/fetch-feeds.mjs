@@ -108,7 +108,8 @@ const NO = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'norway-places.jso
 const PREP = '(?:[Ii]|[Pp]å|[Vv]ed|[Ff]r[aå]|[Tt]il|[Uu]t[ae]nfor|[Nn]ær|[Mm]ot|[Gg]jennom|[Ff]orbi|(?:[Ss]ør|[Nn]ord|[Øø]st|[Vv]est) for)';
 const NO_RE = NO.flatMap(g => [g.n, ...(g.a || [])].map(n => ({g, n,
   prep: new RegExp(`(?<![\\p{L}])${PREP}\\s+${esc(n)}(?![\\p{L}-])`, 'u'),
-  bare: g.w ? null : new RegExp(`(?<![\\p{L}-])${esc(n)}(?![\\p{L}-])`, 'u')})));
+  // strong names also match as the first part of a hyphenated compound ("Voss-ordføraren")
+  bare: g.w ? null : new RegExp(`(?<![\\p{L}-])${esc(n)}(?![\\p{L}])`, 'u')})));
 // A name after a preposition ("i Bergen", "på Voss") is strong evidence. Bare names count only for
 // municipalities, counties and large towns, because many small place names are also surnames or common words.
 export function locateNorway(title, desc, fylker = []) {
@@ -135,7 +136,7 @@ export function categoriseNo(text) {
   return 'other';
 }
 const NRK_FEEDS = [
-  ['Buskerud', 'ostafjells/buskerud', ['33']], ['Troms og Finnmark', 'nordnytt', ['55', '56'], [69.65, 18.96]], ['Hedmark og Oppland', 'ho', ['34']],
+  ['Buskerud', 'ostafjells/buskerud|buskerud', ['33']], ['Troms og Finnmark', 'nordnytt|tromsogfinnmark|troms|finnmark', ['55', '56'], [69.65, 18.96]], ['Hedmark og Oppland', 'ho', ['34']],
   ['Hordaland', 'hordaland', ['46'], [60.39, 5.32]], ['Sogn og Fjordane', 'sognogfjordane', ['46'], [61.45, 5.85]], ['Møre og Romsdal', 'mr', ['15']],
   ['Nordland', 'nordland', ['18']], ['Rogaland', 'rogaland', ['11']], ['Sørlandet', 'sorlandet', ['42']], ['Telemark', 'ostafjells/telemark', ['40']],
   ['Trøndelag', 'trondelag', ['50']], ['Vestfold', 'ostafjells/vestfold', ['39']], ['Østfold', 'ostfold', ['31']],
@@ -163,10 +164,12 @@ export function parseNRK(xml, [district, , fylker, centre]) {
 async function fetchNRK() {
   const got = new Map(); let ok = 0, fail = 0;
   for (const f of NRK_FEEDS) {
-    const url = `https://www.nrk.no/${f[1] ? f[1] + '/' : ''}toppsaker.rss`;
     try {
-      const xml = await get(url);
-      if (!ok) console.log('nrk sample item tags:', [...new Set(((items(xml)[0] || '').match(/<[a-zA-Z:]+/g) || []))].join(' '));
+      let xml = null, err;
+      for (const p of f[1].split('|')) {   // some districts have moved; try each known path
+        try { xml = await get(`https://www.nrk.no/${p ? p + '/' : ''}toppsaker.rss`); if (p !== f[1].split('|')[0]) console.log(`nrk ${f[0]}: using /${p}/`); break; } catch (e) { err = e; }
+      }
+      if (xml === null) throw err;
       for (const i of parseNRK(xml, f)) { const prev = got.get(i.id); if (!prev || (i.located && !prev.located)) got.set(i.id, i); }
       ok++;
     } catch (e) { fail++; console.warn(`nrk ${f[0]}: failed (${e.message || e})`); }
