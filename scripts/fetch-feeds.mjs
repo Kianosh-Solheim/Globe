@@ -109,7 +109,7 @@ const PREP = '(?:[Ii]|[Pp]å|[Vv]ed|[Ff]r[aå]|[Tt]il|[Uu]t[ae]nfor|[Nn]ær|[Mm]
 const NO_RE = NO.flatMap(g => [g.n, ...(g.a || [])].map(n => ({g, n,
   prep: new RegExp(`(?<![\\p{L}])${PREP}\\s+${esc(n)}(?![\\p{L}-])`, 'u'),
   // municipality name fused with a landmark word: "Lærdalstunnelen", "Tromsøbrua"
-  comp: g.t === 'kommune' && n.length > 3 ? new RegExp(`(?<![\\p{L}-])${esc(n)}s?(?:tunnelen|brua|broen|brui|sykehuset|sjukehuset|ferja|ferga|havna|hamna|lufthavn|flyplass|sentrum|området|fjorden|elva|vassdraget)(?![\\p{L}])`, 'u') : null,
+  comp: g.t === 'kommune' && !g.w && n.length > 3 ? new RegExp(`(?<![\\p{L}-])${esc(n)}s?(?:tunnelen|brua|broen|brui|sykehuset|sjukehuset|ferja|ferga|havna|hamna|lufthavn|flyplass|sentrum|området|fjorden|elva|vassdraget)(?![\\p{L}])`, 'u') : null,
   // strong names also match as the first part of a hyphenated compound ("Voss-ordføraren")
   bare: g.w ? null : new RegExp(`(?<![\\p{L}-])${esc(n)}(?![\\p{L}])`, 'u')})));
 // A name after a preposition ("i Bergen", "på Voss") is strong evidence. Bare names count only for
