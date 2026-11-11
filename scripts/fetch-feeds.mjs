@@ -108,6 +108,8 @@ const NO = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'norway-places.jso
 const PREP = '(?:[Ii]|[Pp]å|[Vv]ed|[Ff]r[aå]|[Tt]il|[Uu]t[ae]nfor|[Nn]ær|[Mm]ot|[Gg]jennom|[Ff]orbi|(?:[Ss]ør|[Nn]ord|[Øø]st|[Vv]est) for)';
 const NO_RE = NO.flatMap(g => [g.n, ...(g.a || [])].map(n => ({g, n,
   prep: new RegExp(`(?<![\\p{L}])${PREP}\\s+${esc(n)}(?![\\p{L}-])`, 'u'),
+  // municipality name fused with a landmark word: "Lærdalstunnelen", "Tromsøbrua"
+  comp: g.t === 'kommune' && n.length > 3 ? new RegExp(`(?<![\\p{L}-])${esc(n)}s?(?:tunnelen|brua|broen|brui|sykehuset|sjukehuset|ferja|ferga|havna|hamna|lufthavn|flyplass|sentrum|området|fjorden|elva|vassdraget)(?![\\p{L}])`, 'u') : null,
   // strong names also match as the first part of a hyphenated compound ("Voss-ordføraren")
   bare: g.w ? null : new RegExp(`(?<![\\p{L}-])${esc(n)}(?![\\p{L}])`, 'u')})));
 // A name after a preposition ("i Bergen", "på Voss") is strong evidence. Bare names count only for
@@ -115,9 +117,10 @@ const NO_RE = NO.flatMap(g => [g.n, ...(g.a || [])].map(n => ({g, n,
 export function locateNorway(title, desc, fylker = []) {
   let best = null;
   for (const [text, inTitle] of [[title, 1], [desc, 0]]) {
-    for (const {g, n, prep, bare} of NO_RE) {
+    for (const {g, n, prep, bare, comp} of NO_RE) {
       let m = prep.exec(text), score = 3;
       if (!m && bare) { m = bare.exec(text); score = 2; }
+      if (!m && comp) { m = comp.exec(text); score = 2.5; }
       if (!m) continue;
       score += inTitle + (fylker.includes(g.f) ? 2 : 0) + (g.t === 'fylke' ? 0 : g.t === 'omr' ? 0.3 : 0.5) + Math.min(n.length, 12) / 100;
       if (!best || score > best.score || (score === best.score && m.index < best.i)) best = {score, i: m.index, g, n, inTitle};
